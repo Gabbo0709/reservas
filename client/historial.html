@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de solicitudes</title>
+</head>
+
+<body>
+    <header>
+        <nav>
+            <section>
+                <a>
+                    <img>
+                </a>
+                <a role="button" aria-label="menu" aria-expanded="false" data-target="navbarSistema">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </section>
+            <section id="navbarSistema">
+                <section class="navbar-start">
+                    <a class="navbar-item">
+                        Realizar solicitud
+                    </a>
+                    <a class="navbar-item">
+                        Historial solicitudes
+                    </a>
+                    <!--Icono de usuario-->
+                    <section class="navbar-end">
+                        <section class="navbar-item has-dropdown is-hoverable">
+                            <a class="navbar-link">
+                                <a>
+                                    Datos personales
+                                </a>
+                                <hr class="navbar-divider">
+                                <a>
+                                    Cerrar sesion
+                                </a>
+                            </a>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </nav>
+    </header>
+    <main>
+        <article>
+            <h2>Historial de solicitudes</h2>
+            <form>
+                <label>Filtrar por estado:
+                    <select id="select-estado" name="select-estado">
+                        <option selected disabled>Estado de solicitud</option>
+                    </select>
+                </label>
+                <label>Seleccionar fecha:
+                    <input id="txt-fecha" name="txt-fecha" type="date" value="2024-01-16">
+                </label>
+            </form>
+        </article>
+        <section id="solicitudes">
+            <table id="tb-solicitudes">
+                <thead>
+                    <th>Nombre de empleado</th>
+                    <th>Motivo</th>
+                    <th>Fecha de realizacion</th>
+                    <th>Fecha solicitada</th>
+                    <th>Estado</th>
+                    <th>Detalles</th>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>
