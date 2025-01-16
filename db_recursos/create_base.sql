@@ -60,11 +60,11 @@ CREATE TABLE Solicitud (
     year_solicitud			INT NOT NULL,
     month_solicitud			INT NOT NULL,
 	estado					VARCHAR (10) DEFAULT 'PENDIENTE',
-	fecha_solicitud	 		DATETIME DEFAULT CURRENT_TIMESTAMP(),
+	fecha_solicitud	 		DATE DEFAULT CURRENT_TIMESTAMP(),
     motivo					VARCHAR (128),
 	rfc						VARCHAR (13),
     PRIMARY KEY (year_solicitud, month_solicitud, id_solicitud),
-    CHECK (estado IN ('PENDIENTE', 'ACEPTADA', 'RECHAZADA', 'CADUCADA')),
+    CHECK (estado IN ('PENDIENTE', 'ACEPTADA', 'RECHAZADA', 'SIN RESPUESTA')),
 	FOREIGN KEY (rfc) REFERENCES Empleado (rfc)
 );
 
