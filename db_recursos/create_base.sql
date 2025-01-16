@@ -1,3 +1,4 @@
+DROP DATABASE IF EXISTS db_recursos;
 CREATE DATABASE db_recursos;
 USE db_recursos;
 
@@ -12,7 +13,7 @@ CREATE TABLE Sede (
 	nom_sede				VARCHAR(64)
 );
 
-CREATE TABLE Area (
+CREATE TABLE Areas (
 	id_area					INT PRIMARY KEY AUTO_INCREMENT,
 	ubi_area				VARCHAR(32),
 	nom_area				VARCHAR(32),
@@ -20,92 +21,101 @@ CREATE TABLE Area (
 	FOREIGN KEY (id_sede) REFERENCES Sede (id_sede)
 );
 
+CREATE TABLE Administrador (
+	usuario					VARCHAR(32),
+    id_sede					INT,
+    FOREIGN KEY (id_sede) REFERENCES Sede (id_sede)
+);
+
+-- Tipo: SALA, COMPUTO, VEHICULO
+-- Cada recurso tiene sus detalles dependiendo el tipo
+-- Ej: sala tiene dimensiones y aforo, computo tiene marca y caracteristicas, vehiculo tiene capacidad, modelo, etc
+-- Los servicios dependen del recurso, ej: sala tiene limpieza, caterin, computo tiene software especifico o liciencia y vehiculo servicio de chofer o de alimento
 CREATE TABLE Recurso (
-	id_rec					INT PRIMARY KEY AUTO_INCREMENT,
-	desc_rec				VARCHAR(8),
-	disponile				INT,
+	id_recurso				INT PRIMARY KEY AUTO_INCREMENT,
+    nombre_recurso			VARCHAR(128),
+	cantidad_disponible		INT,
 	estado					TINYINT(1),
 	tipo					VARCHAR(10),
+    detalles				JSON,
+    servicio				JSON,
 	id_sede					INT, 
 	FOREIGN KEY (id_sede) REFERENCES Sede (id_sede) 
 );
 
-CREATE TABLE Sala (
-	id_sala					INT PRIMARY KEY AUTO_INCREMENT,
-	dimensiones		  		VARCHAR (20), -- ?
-	aforo					INT,
-	id_rec					INT,
-	FOREIGN KEY (id_rec) REFERENCES Recurso (id_rec)
-);
-
-CREATE TABLE Computo (
-	id_computo				INT PRIMARY KEY AUTO_INCREMENT,
-	carac_computo	 		VARCHAR (20), -- ?
-	marca					VARCHAR(32),
-	id_rec					INT,
-	FOREIGN KEY (id_rec) REFERENCES Recurso (id_rec)
-);
-
-CREATE TABLE Vehiculo (
-	id_vehiculo				INT PRIMARY KEY AUTO_INCREMENT,
-	capacidad			 	VARCHAR (20), -- ?
-	modelo				  	VARCHAR(32),
-	id_rec					INT, 
-	FOREIGN KEY (id_rec) REFERENCES Recurso (id_rec)
-);
-
 CREATE TABLE Empleado (
 	rfc						VARCHAR (13) PRIMARY KEY,
-	nom_emp			 		VARCHAR (32),
-	ap_emp				 	VARCHAR (32),
-	am_emp					VARCHAR (32),
-	tel_emp				 	VARCHAR(128),
+	nom_empeado			 	VARCHAR (32),
+	ap_empleado				VARCHAR (32),
+	am_empleado				VARCHAR (32),
+    email					VARCHAR (128),
+	tel_empleado			VARCHAR(128),
 	id_area				  	INT, 
-	FOREIGN KEY (id_area) REFERENCES Area (id_area)
+	FOREIGN KEY (id_area) REFERENCES Areas (id_area)
 );
 
+-- La solicitud esta asociada a un empleado que la realizo, y la fecha en la que lo hizo
 CREATE TABLE Solicitud (
-	id_solicitud			INT PRIMARY KEY AUTO_INCREMENT,
-	estado					VARCHAR(10) CHECK (estado IN ('PENDIENTE' OR 'ACEPTADA' OR 'RECHAZADA' OR 'CADUCADA')),
+	id_solicitud			INT,
+    year_solicitud			INT NOT NULL,
+    month_solicitud			INT NOT NULL,
+	estado					VARCHAR (10) DEFAULT 'PENDIENTE',
 	fecha_solicitud	 		DATETIME DEFAULT CURRENT_TIMESTAMP(),
-	rfc						VARCHAR (13), 
+    motivo					VARCHAR (128),
+	rfc						VARCHAR (13),
+    PRIMARY KEY (year_solicitud, month_solicitud, id_solicitud),
+    CHECK (estado IN ('PENDIENTE', 'ACEPTADA', 'RECHAZADA', 'CADUCADA')),
 	FOREIGN KEY (rfc) REFERENCES Empleado (rfc)
 );
 
+-- Los diferentes horarios que se pueden seleccionar en la solicitud, ya sea diferentes horas un mismo dia o diferentes dias
 CREATE TABLE Solicitud_Horario (
 	f_inicio				DATE,
 	h_inicio				TIME,
 	f_fin					DATE,
 	h_fin					TIME,
-	id_solicitud			INT, 
-	FOREIGN KEY (id_solicitud) REFERENCES Solicitud (id_solicitud)
+    id_solicitud			INT,
+    year_solicitud			INT NOT NULL,
+    month_solicitud			INT NOT NULL,
+	FOREIGN KEY (year_solicitud, month_solicitud, id_solicitud) 
+		REFERENCES Solicitud (year_solicitud, month_solicitud, id_solicitud)
 );
 
-CREATE TABLE Solicitud_Sala (
-	aforo_solicitado		INT,
-	proyector				TINYINT (1),
-	limpieza				TINYINT (1),
-	caterin					TINYINT (1),
-	id_solicitud			INT, 
-	id_sala					INT, 
-    FOREIGN KEY (id_solicitud) REFERENCES Solicitud (id_solicitud),
-	FOREIGN KEY (id_sala) REFERENCES Sala (id_sala)
+-- Se relacionan los recursos con la solicitud
+CREATE TABLE Solicitud_Recurso (
+	id_solicitud		INT,
+    id_recurso			INT,
+    year_solicitud			INT NOT NULL,
+    month_solicitud			INT NOT NULL,
+    FOREIGN KEY (year_solicitud, month_solicitud, id_solicitud) 
+		REFERENCES Solicitud (year_solicitud, month_solicitud, id_solicitud),
+    FOREIGN KEY (id_recurso) REFERENCES Recurso (id_recurso)
 );
 
-CREATE TABLE Solicitud_Computo (
-	software				VARCHAR (32),
-	licencia	  			VARCHAR (32),
-	id_solicitud			INT, 
-	id_computo				INT,
-    FOREIGN KEY (id_solicitud) REFERENCES Solicitud (id_solicitud),
-	FOREIGN KEY (id_computo) REFERENCES Computo (id_computo)
-);
+-- CREATE TABLE Plantilla_General (
+-- 	id_plantilla		INT PRIMARY KEY,
+-- 	id_sede				INT,
+--     motivo				VARCHAR (64),
+--     FOREIGN KEY	(id_sede) REFERENCES Sede (id_sede)
+-- );
 
-CREATE TABLE Solicitud_Vehiculo (
-	chofer	 				TINYINT (1),
-	comida				   	TINYINT (1),
-	id_solicitud			INT, 
-	id_vehiculo				INT,
-	FOREIGN KEY (id_solicitud) REFERENCES Solicitud (id_solicitud), 
-	FOREIGN KEY (id_vehiculo) REFERENCES Vehiulo (id_vehiculo)
-);
+-- CREATE TABLE Plantilla_Recurso (
+-- 	id_plantilla		INT,
+--     id_recurso			INT,
+--     FOREIGN KEY (id_plantilla) REFERENCES Plantilla_General (id_plantilla),
+--     FOREIGN KEY (id_recurso) REFERENCES Recurso (id_recurso)
+-- );
+
+-- CREATE TABLE Plantilla_Empleado (
+-- 	id_plantilla_emp	INT PRIMARY KEY,
+--     rfc					VARCHAR(13),
+--     motivo				VARCHAR(32),
+--     FOREIGN KEY (rfc) REFERENCES Empleado (rfc)
+-- );
+
+-- CREATE TABLE Plantilla_Empleado_Recurso (
+-- 	id_plantilla_emp	INT,
+--     id_recurso			INT,
+--     FOREIGN KEY (id_plantilla_emp) REFERENCES Plantilla_Empleado (id_plantilla_emp),
+-- 	FOREIGN KEY (id_recurso) REFERENCES Recurso (id_recurso)
+-- );
