@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Título de la página</title>
+</head>
+<body>
+    <article>
+        <h2>Gestion de recursos</h2>
+        <form>
+            <label>
+                Buscar por tipo:
+                <select id="select-tipo">
+                    <option selected disabled>Tipo de recurso</option>
+                </select>
+            </label>
+            <label>
+                Buscar por nobre:
+                <input id="txt-nombre" type="text">
+            </label>
+            <button id="btn-buscar">Buscar</button>
+            <button id="btn-agregar">Agregar</button>
+        </form>
+    </article>
+    <section>
+        <table>
+            <thead>
+                <th>Nombre</th>
+                <th>Disponibles</th>
+                <th>Estado</th>
+                <th>Detalles</th>
+            </thead>
+            <tbody id="tb-recursos-body">
+                
+            </tbody>
+        </table>
+    </section>
+</body>
+</html>
