@@ -2,6 +2,7 @@ USE db_recursos;
 
 CREATE VIEW GetHistorialEmpleado AS
 	SELECT	CONCAT(e.nom_empleado, ' ', e.ap_empleado, ' ', e.am_empleado) AS nombre,
+			se.id_sede,
 			e.rfc,
 			a.nom_area,
 			s.motivo,
@@ -26,4 +27,8 @@ CREATE VIEW GetHistorialEmpleado AS
 		Areas a
 	ON
 		a.id_area = e.id_area
+	JOIN
+		Sede se
+	ON
+		se.id_sede = a.id_sede
 		

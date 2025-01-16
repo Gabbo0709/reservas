@@ -19,35 +19,58 @@ public class HistorialController {
     @GetMapping("/historial")
     public List<Map<String, Object>> historial(
             @RequestParam(value="tipo", defaultValue = "1") int tipo,
-            @RequestParam(value="empleado") Integer empleado)
+            @RequestParam(value="rfc") String rfc,
+            @RequestParam(value="sede") Integer sede
+    )
     {
-        if (tipo == 2 && empleado != null) {
-            return historialEmpleado(empleado);
+        if (tipo == 2 && rfc != null) {
+            return historialEmpleado(rfc);
         }
-        String query = "";
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE id=" + sede;
         return jdbcTemplate.queryForList(query);
     }
 
-    public List<Map<String, Object>> historialEmpleado(int empleado) {
-        String query = "";
+    public List<Map<String, Object>> historialEmpleado(String rfc) {
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc=" + rfc;
         return jdbcTemplate.queryForList(query);
     }
 
     @GetMapping("/historial/estado")
     public List<Map<String, Object>> historialEstado(
-            @RequestParam(value="estado") String estado
+            @RequestParam(value="estado") String estado,
+            @RequestParam(value="tipo", defaultValue = "1") int tipo,
+            @RequestParam(value="rfc") String rfc,
+            @RequestParam(value="sede") Integer sede
     )
     {
-        String query = "";
+        if (tipo == 2 && rfc != null) {
+            return historialEmpleado(rfc, estado);
+        }
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede + " AND estado = " + estado;
+        return jdbcTemplate.queryForList(query);
+    }
+
+    public List<Map<String, Object>> historialEmpleado(String rfc, String estado) {
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc=" + rfc + " AND estado=" + estado;
         return jdbcTemplate.queryForList(query);
     }
 
     @GetMapping("/historial/fecha")
     public List<Map<String, Object>> historialFecha(
-            @RequestParam(value="fecha") String fecha
+            @RequestParam(value="fecha") String fecha,
+            @RequestParam(value="tipo", defaultValue = "1") int tipo,
+            @RequestParam(value="rfc") String rfc,
+            @RequestParam(value="sede") Integer sede
     )
     {
-        String query = "";
+        if (tipo == 2 && rfc != null) {
+            return historialEmpleadoFecha(rfc, fecha);
+        }
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede + " AND fecha_solicitud = " + fecha;;
+        return jdbcTemplate.queryForList(query);
+    }
+    public List<Map<String, Object>> historialEmpleadoFecha(String rfc, String fecha) {
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc=" + rfc + " AND fecha_solicitud=" + fecha;
         return jdbcTemplate.queryForList(query);
     }
 }
