@@ -30,5 +30,20 @@ CREATE VIEW GetHistorialEmpleado AS
 	JOIN
 		Sede se
 	ON
-		se.id_sede = a.id_sede
+		se.id_sede = a.id_sede;
+
+CREATE VIEW GetRecursoSede AS
+	SELECT  s.id_sede,
+				r.nombre_recurso,
+				r.id_recurso,
+				r.cantidad_disponible,
+				r.tipo,
+				r.detalles,
+				r.servicio
+	FROM
+			Sede s
+	JOIN
+			Recurso r
+	ON
+			r.id_sede = s.id_sede;
 		
