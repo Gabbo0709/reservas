@@ -46,4 +46,24 @@ CREATE VIEW GetRecursoSede AS
 			Recurso r
 	ON
 			r.id_sede = s.id_sede;
+
+CREATE VIEW GetEmpleados AS
+	SELECT	e.rfc,
+				CONCAT(e.nom_empleado, ' ', e.ap_empleado, ' ', e.am_empleado) AS nombre,
+				e.email,
+				e.tel_empleado,
+				a.nom_area,
+				s.id_sede,
+				a.id_area
+	FROM
+				Empleado e
+	JOIN
+				Area a
+	ON
+				e.id_area = a.id_area
+	JOIN
+				Sede s
+	ON	
+				s.id_sede = a.id_sede;
+				
 		
