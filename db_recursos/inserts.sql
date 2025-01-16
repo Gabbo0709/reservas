@@ -53,34 +53,34 @@ VALUES ('Monitor Dell 27"', 10, 1, 'Computo', '{"resolucion": "1440p", "tamanio"
 -- Teléfono IP
 INSERT INTO Recurso (nombre_recurso, cantidad_disponible, estado, tipo, detalles, servicio, id_sede) 
 VALUES ('Teléfono IP Cisco', 20, 1, 'Computo', '{"modelo": "CP-7841", "funciones": ["conferencia", "buzón de voz"]}', '{"soporte": "24/7"}', 1);
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('XXXXX010101XX', 'Juan', 'Pérez', 'Gómez', 'juan.perez@example.com', '555-123-4567', 1);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('YYYYY020202YY', 'María', 'García', 'López', 'maria.garcia@example.com', '555-987-6543', 2);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('ZZZZZ030303ZZ', 'Pedro', 'Martínez', 'Hernández', 'pedro.martinez@example.com', '555-567-8901', 3);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('AAAA040404AA', 'Ana', 'Rodríguez', 'Sánchez', 'ana.rodriguez@example.com', '555-246-8013', 1);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('BBBB050505BB', 'Luis', 'González', 'Ramírez', 'luis.gonzalez@example.com', '555-135-7924', 2);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('CCCC060606CC', 'Sofia', 'Fernández', 'Torres', 'sofia.fernandez@example.com', '555-864-2097', 3);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('DDDD070707DD', 'Miguel', 'López', 'Flores', 'miguel.lopez@example.com', '555-357-9142', 1);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('EEEE080808EE', 'Carmen', 'Hernández', 'Vázquez', 'carmen.hernandez@example.com', '555-975-3186', 2);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('FFFF090909FF', 'David', 'Sánchez', 'Jiménez', 'david.sanchez@example.com', '555-468-0253', 3);
 
-INSERT INTO Empleado (rfc, nom_empeado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
+INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_empleado, id_area) 
 VALUES ('GGGG101010GGG', 'Laura', 'Ramírez', 'Ruiz', 'laura.ramirez@example.com', '555-789-1304', 1);
 
 -- Solicitud 1: Juan Pérez solicita una laptop Dell XPS 15

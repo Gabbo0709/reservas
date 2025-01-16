@@ -45,7 +45,7 @@ CREATE TABLE Recurso (
 
 CREATE TABLE Empleado (
 	rfc						VARCHAR (13) PRIMARY KEY,
-	nom_empeado			 	VARCHAR (32),
+	nom_empleado			VARCHAR (32),
 	ap_empleado				VARCHAR (32),
 	am_empleado				VARCHAR (32),
     email					VARCHAR (128),
