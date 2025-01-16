@@ -1,0 +1,53 @@
+package com.blackfang.reservas.controllers;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import java.util.Map;
+
+@RestController
+@CrossOrigin(origins = "*")
+public class HistorialController {
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
+
+    @GetMapping("/historial")
+    public List<Map<String, Object>> historial(
+            @RequestParam(value="tipo", defaultValue = "1") int tipo,
+            @RequestParam(value="empleado") Integer empleado)
+    {
+        if (tipo == 2 && empleado != null) {
+            return historialEmpleado(empleado);
+        }
+        String query = "";
+        return jdbcTemplate.queryForList(query);
+    }
+
+    public List<Map<String, Object>> historialEmpleado(int empleado) {
+        String query = "";
+        return jdbcTemplate.queryForList(query);
+    }
+
+    @GetMapping("/historial/estado")
+    public List<Map<String, Object>> historialEstado(
+            @RequestParam(value="estado") String estado
+    )
+    {
+        String query = "";
+        return jdbcTemplate.queryForList(query);
+    }
+
+    @GetMapping("/historial/fecha")
+    public List<Map<String, Object>> historialFecha(
+            @RequestParam(value="fecha") String fecha
+    )
+    {
+        String query = "";
+        return jdbcTemplate.queryForList(query);
+    }
+}
