@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Gestionar empleados</title>
+</head>
+<body>
+    <article>
+        <h2>Gestion de emmpleados</h2>
+        <form>
+            
+            <label>
+                Buscar por Area:
+                <select id="select-area">
+                    <option selected disabled>Area</option>
+                    </select>
+            </label>
+            <label>
+                Buscar por RFC:
+                <input id="txt-rfc" type="text">
+            </label>
+            
+            <button id="btn-buscar">Buscar</button>
+            <button id="btn-agregar">Agregar</button>
+        </form>
+    </article>
+    <section>
+        <table>
+            <thead>
+                <th>Nombre</th>
+                <th>Area</th>
+                <th>Estado</th>
+                <th>Detalles</th>
+            </thead>
+            <tbody id="tb-empleado-body">
+                
+            </tbody>
+        </table>
+    </section>
+    <dialog id="nuevo-empleado" open>
+        <header>
+            <h3>Agregar empleado</h3>
+        </header>
+        <menu>
+            <form>
+                <label>
+                    Nombre:
+                    <input id="txt-nombre-emp" autofocus>
+                </label>
+                <label>
+                    Apellido paterno:
+                    <input id="txt-ap-emp">
+                </label>
+                <label>
+                    Apellido materno:
+                    <input id="txt-am-emp">
+                </label>
+                <label>
+                    Correo electronico:
+                    <input type="mail" id="txt-email-emp">
+                </label>
+                <label>
+                    RFC:
+                    <input type="text" id="txt-rfc-emp" maxlength="13">
+                </label>
+                <label>
+                    Area:
+                    <select id="select-area-emp">
+                        <option selected disabled>Area del empleado</option>
+                    </select>
+                </label>
+                <footer>
+                    <button>Agregar</button>
+                    <button>Cancelar</button>
+                </footer>
+            </form>
+        </menu>
+    </dialog>
+</body>
+</html>
