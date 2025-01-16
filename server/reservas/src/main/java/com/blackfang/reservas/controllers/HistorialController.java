@@ -15,7 +15,7 @@ public class HistorialController {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
-
+    @CrossOrigin(origins = "*")
     @GetMapping("/historial")
     public List<Map<String, Object>> historial(
             @RequestParam(value="tipo", defaultValue = "1") int tipo,
@@ -26,12 +26,17 @@ public class HistorialController {
         if (tipo == 2 && rfc != null) {
             return historialEmpleado(rfc);
         }
-        String query = "SELECT * FROM GetHistorialEmpleado WHERE id=" + sede;
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede;
         return jdbcTemplate.queryForList(query);
     }
 
     public List<Map<String, Object>> historialEmpleado(String rfc) {
-        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc=" + rfc;
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc='" + rfc + "'";
+        return jdbcTemplate.queryForList(query);
+    }
+
+    public List<Map<String, Object>> historialEmpleado(String rfc, String estado) {
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc='" + rfc + "' AND estado=" + estado+ "'";
         return jdbcTemplate.queryForList(query);
     }
 
@@ -46,12 +51,7 @@ public class HistorialController {
         if (tipo == 2 && rfc != null) {
             return historialEmpleado(rfc, estado);
         }
-        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede + " AND estado = " + estado;
-        return jdbcTemplate.queryForList(query);
-    }
-
-    public List<Map<String, Object>> historialEmpleado(String rfc, String estado) {
-        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc=" + rfc + " AND estado=" + estado;
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede + " AND estado = '" + estado + "'";
         return jdbcTemplate.queryForList(query);
     }
 
@@ -66,11 +66,11 @@ public class HistorialController {
         if (tipo == 2 && rfc != null) {
             return historialEmpleadoFecha(rfc, fecha);
         }
-        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede + " AND fecha_solicitud = " + fecha;;
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE id_sede=" + sede + " AND fecha_solicitud = '" + fecha + "'";;
         return jdbcTemplate.queryForList(query);
     }
     public List<Map<String, Object>> historialEmpleadoFecha(String rfc, String fecha) {
-        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc=" + rfc + " AND fecha_solicitud=" + fecha;
+        String query = "SELECT * FROM GetHistorialEmpleado WHERE rfc= '" + rfc + "' AND fecha_solicitud= '" + fecha + "'";;
         return jdbcTemplate.queryForList(query);
     }
 }

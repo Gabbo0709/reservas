@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Historial de solicitudes</title>
+    <script src="../src/historial.js"></script>
+    <script src="../src/utilidades.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@1.0.2/css/bulma.min.css">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar is-light">
+            <section class="navbar-brand">
+                <a class="navbar-item">
+                    <img alt="">
+                </a>
+                <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="navbarSistema">
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                    <span aria-hidden="true"></span>
+                </a>
+            </section>
+            <section id="navbarSistema" class="navbar-menu">
+                <section class="navbar-start">
+                    <a class="navbar-item">
+                        Realizar solicitud
+                    </a>
+                    <a class="navbar-item">
+                        Historial solicitudes
+                    </a>
+                </section>
+                <section class="navbar-end"></section>
+                    <section class="navbar-item has-dropdown is-hoverable">
+                        <a class="navbar-link">
+                            Usuario
+                        </a>
+                        <section class="navbar-dropdown">
+                            <a class="navbar-item">
+                                Datos personales
+                            </a>
+                            <hr class="navbar-divider">
+                            <a class="navbar-item">
+                                Cerrar sesion
+                            </a>
+                        </section>
+                    </section>
+                </section>
+            </section>
+        </nav>
+    </header>
+    <main class="section">
+        <article class="container">
+            <h2 class="title is-4">Historial de solicitudes</h2>
+            <form class="field">
+                <label class="label">Filtrar por estado:
+                    <section class="control">
+                        <div class="select">
+                            <select id="select-estado" name="select-estado">
+                                <option selected disabled>Estado de solicitud</option>
+                                <option value="PENDIENTE">Pendiente</option>
+                                <option value="ACEPTADA">Aceptada</option>
+                                <option value="RECHAZADA">Rechazada</option>
+                                <option value="SIN RESPUESTA">Sin respuesta</option>
+                            </select>
+                        </div>
+                    </section>
+                </label>
+                <label class="label">Seleccionar fecha:
+                    <div class="control">
+                        <input id="txt-fecha" name="txt-fecha" class="input" type="date" value="2024-01-16">
+                    </div>
+                </label>
+            </form>
+        </article>
+        <section id="solicitudes" class="container">
+            <table id="tb-solicitudes" class="table is-fullwidth is-striped">
+                <thead>
+                    <tr>
+                        <th>Nombre de empleado</th>
+                        <th>Area</th>
+                        <th>Motivo</th>
+                        <th>Fecha de realizacion</th>
+                        <th>Fecha solicitada</th>
+                        <th>Estado</th>
+                        <th>Detalles</th>
+                    </tr>
+                </thead>
+                <tbody id="tb-solicitudes-body">
+                </tbody>
+            </table>
+        </section>
+    </main>
+</body>
+
+</html>
