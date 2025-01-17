@@ -60,7 +60,7 @@ CREATE TABLE Solicitud (
     year_solicitud			INT NOT NULL,
     month_solicitud			INT NOT NULL,
 	estado					VARCHAR (10) DEFAULT 'PENDIENTE',
-	fecha_solicitud	 		DATE DEFAULT CURRENT_TIMESTAMP(),
+	fecha_solicitud	 		DATE DEFAULT (CURRENT_DATE),
     motivo					VARCHAR (128),
 	rfc						VARCHAR (13),
     PRIMARY KEY (year_solicitud, month_solicitud, id_solicitud),
@@ -69,11 +69,10 @@ CREATE TABLE Solicitud (
 );
 
 -- Los diferentes horarios que se pueden seleccionar en la solicitud, ya sea diferentes horas un mismo dia o diferentes dias
+-- Se maneja fecha y hora en un solo atributo para un manejo mas sencillo para los recursos disponibles
 CREATE TABLE Solicitud_Horario (
-	f_inicio				DATE,
-	h_inicio				TIME,
-	f_fin					DATE,
-	h_fin					TIME,
+	f_inicio				DATETIME,
+	f_fin					DATETIME,
     id_solicitud			INT,
     year_solicitud			INT NOT NULL,
     month_solicitud			INT NOT NULL,

@@ -32,7 +32,7 @@ VALUES ('Sala de Juntas A', 1, 1, 'Espacio', '{"capacidad": "10 personas", "equi
 
 -- Sala de juntas B
 INSERT INTO Recurso (nombre_recurso, cantidad_disponible, estado, tipo, detalles, servicio, id_sede) 
-VALUES ('Sala de Juntas B', 1, 0, 'Espacio', '{"capacidad": "20 personas", "equipamiento": ["proyector", "sistema de sonido", "pizarra interactiva"]}', '{"wifi": true, "servicio de catering": true}', 1);
+VALUES ('Sala de Juntas B', 1, 1, 'Espacio', '{"capacidad": "20 personas", "equipamiento": ["proyector", "sistema de sonido", "pizarra interactiva"]}', '{"wifi": true, "servicio de catering": true}', 1);
 
 -- Vehículo 1
 INSERT INTO Recurso (nombre_recurso, cantidad_disponible, estado, tipo, detalles, servicio, id_sede) 
@@ -84,44 +84,33 @@ INSERT INTO Empleado (rfc, nom_empleado, ap_empleado, am_empleado, email, tel_em
 VALUES ('GGGG101010GGG', 'Laura', 'Ramírez', 'Ruiz', 'laura.ramirez@example.com', '555-789-1304', 1);
 
 -- Solicitud 1: Juan Pérez solicita una laptop Dell XPS 15
-INSERT INTO Solicitud (year_solicitud, month_solicitud, estado, motivo, rfc) 
-VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'PENDIENTE', 'Necesito una laptop para trabajar en un proyecto', 'XXXXX010101XX');
+INSERT INTO Solicitud (year_solicitud, month_solicitud, motivo, rfc) 
+VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'Necesito una laptop para trabajar en un proyecto', 'XXXXX010101XX');
 
 -- Solicitud 2: María García solicita la Sala de Juntas A
-INSERT INTO Solicitud (year_solicitud, month_solicitud, estado, motivo, rfc) 
-VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'PENDIENTE', 'Reunión con clientes', 'YYYYY020202YY');
+INSERT INTO Solicitud (year_solicitud, month_solicitud, motivo, rfc) 
+VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'Reunión con clientes', 'YYYYY020202YY');
 
 -- Solicitud 3: Pedro Martínez solicita un vehículo Toyota Corolla
-INSERT INTO Solicitud (year_solicitud, month_solicitud, estado, motivo, rfc) 
-VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'PENDIENTE', 'Visita a clientes fuera de la ciudad', 'ZZZZZ030303ZZ');
+INSERT INTO Solicitud (year_solicitud, month_solicitud, motivo, rfc) 
+VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'Visita a clientes fuera de la ciudad', 'ZZZZZ030303ZZ');
 
 -- Solicitud 4: Ana Rodríguez solicita una laptop MacBook Pro 14" y un proyector Epson PowerLite
-INSERT INTO Solicitud (year_solicitud, month_solicitud, estado, motivo, rfc) 
-VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'PENDIENTE', 'Presentación de proyecto a la dirección', 'AAAA040404AA');
+INSERT INTO Solicitud (year_solicitud, month_solicitud, motivo, rfc) 
+VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'Presentación de proyecto a la dirección', 'AAAA040404AA');
 
 -- Solicitud 5: Luis González solicita la Sala de Juntas B
-INSERT INTO Solicitud (year_solicitud, month_solicitud, estado, motivo, rfc) 
-VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'PENDIENTE', 'Capacitación al equipo de ventas', 'BBBB050505BB');
+INSERT INTO Solicitud (year_solicitud, month_solicitud, motivo, rfc) 
+VALUES (YEAR(CURDATE()), MONTH(CURDATE()), 'Capacitación al equipo de ventas', 'BBBB050505BB');
 
 -- Solicitud 1: Juan Pérez solicita la laptop por 3 días
-INSERT INTO Solicitud_Horario (f_inicio, h_inicio, f_fin, h_fin, id_solicitud, year_solicitud, month_solicitud) 
-VALUES (CURDATE(), '09:00:00', DATE_ADD(CURDATE(), INTERVAL 3 DAY), '18:00:00', 1, YEAR(CURDATE()), MONTH(CURDATE()));
-
--- Solicitud 2: María García solicita la sala de juntas por 2 horas
-INSERT INTO Solicitud_Horario (f_inicio, h_inicio, f_fin, h_fin, id_solicitud, year_solicitud, month_solicitud) 
-VALUES (CURDATE(), '10:00:00', CURDATE(), '12:00:00', 2, YEAR(CURDATE()), MONTH(CURDATE()));
-
--- Solicitud 3: Pedro Martínez solicita el vehículo por 1 día
-INSERT INTO Solicitud_Horario (f_inicio, h_inicio, f_fin, h_fin, id_solicitud, year_solicitud, month_solicitud) 
-VALUES (CURDATE(), '08:00:00', CURDATE(), '17:00:00', 3, YEAR(CURDATE()), MONTH(CURDATE()));
-
--- Solicitud 4: Ana Rodríguez solicita los recursos por 1 día
-INSERT INTO Solicitud_Horario (f_inicio, h_inicio, f_fin, h_fin, id_solicitud, year_solicitud, month_solicitud) 
-VALUES (CURDATE(), '14:00:00', CURDATE(), '18:00:00', 4, YEAR(CURDATE()), MONTH(CURDATE()));
-
--- Solicitud 5: Luis González solicita la sala de juntas por 4 horas
-INSERT INTO Solicitud_Horario (f_inicio, h_inicio, f_fin, h_fin, id_solicitud, year_solicitud, month_solicitud) 
-VALUES (CURDATE(), '09:00:00', CURDATE(), '13:00:00', 5, YEAR(CURDATE()), MONTH(CURDATE()));
+INSERT INTO Solicitud_Horario (f_inicio, f_fin, id_solicitud, year_solicitud, month_solicitud) VALUES 
+('2025-01-18 09:00:00', '2025-01-21 18:00:00', 1, YEAR(CURDATE()), MONTH(CURDATE())),
+('2025-01-18 10:00:00', '2025-01-18 12:00:00', 2, YEAR(CURDATE()), MONTH(CURDATE())),
+('2025-01-18 08:00:00', '2025-01-19 17:00:00', 3, YEAR(CURDATE()), MONTH(CURDATE())),
+('2025-01-19 14:00:00', '2025-01-20 18:00:00', 4, YEAR(CURDATE()), MONTH(CURDATE())),
+('2025-01-22 09:00:00', '2025-01-22 13:00:00', 5, YEAR(CURDATE()), MONTH(CURDATE())),
+('2025-01-23 09:00:00', '2025-01-23 13:00:00', 5, YEAR(CURDATE()), MONTH(CURDATE()));
 
 -- Solicitud 1: Laptop Dell XPS 15
 INSERT INTO Solicitud_Recurso (id_solicitud, id_recurso, year_solicitud, month_solicitud) 
