@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -31,7 +31,7 @@ public class RecursosController {
     @CrossOrigin(origins = "*")
     @PostMapping("/recursos/agregar")
     public Boolean agregarRecurso(
-            @RequestBody(required = true) Map<String, Object> recurso
+            @RequestBody Map<String, Object> recurso
             ) {
         String query = "INSERT INTO Recurso (nombre_recurso, cantidad_disponible, estado, tipo, detalles, servicio, id_sede) " +
                 "VALUES (?, ?, ?, ?, ?, ?, ?)";
@@ -49,30 +49,14 @@ public class RecursosController {
     @CrossOrigin(origins = "*")
     @PostMapping("/recursos/modificar")
     public Boolean modificarRecurso(
-            @RequestBody(required = true) Map<String, Object> recurso
+            @RequestBody Map<String, Object> recurso
             ) {
-        StringBuilder setClause = new StringBuilder();
-        List<Object> parameters = new ArrayList<>();
-        String query = "UPDATE Recurso SET ";
-        int changes = 0;
-        for(String fieldName : new String[] {"nombre_recurso", "cantidad_disponible", "detalles"}) {
-            changes += recurso.containsKey(fieldName) ? 1 : 0;
-            appendSetClause(recurso, setClause, parameters, fieldName);
-        }
-        setClause.deleteCharAt(setClause.length() - 2);
-        query += setClause.toString() + " WHERE id_recurso = " + recurso.get("id_recurso");
-        Boolean result = false;
-        if (changes == 0) {
-            return result;
+        String query = "UPDATE Recurso SET cantidad_disponible = ?, tipo = ?, detalles = ?, servicio = ? WHERE id_recurso = ?";
+        List<Object> parameters = new LinkedList<>();
+        for (String fieldName : new String[]{"cantidad_disponible", "tipo", "detalles", "servicio"}) {
+            parameters.add(recurso.get(fieldName));
         }
         return jdbcTemplate.update(query, parameters.toArray()) > 0;
-    }
-
-    private void appendSetClause(Map<String, Object> recurso, StringBuilder setClause, List<Object> parameters, String fieldName) {
-        if (recurso.containsKey(fieldName)) {
-            setClause.append(fieldName).append(" = ?, ");
-            parameters.add(recurso.get(fieldName)); // Agregamos el valor a los parámetros
-        }
     }
 
 
