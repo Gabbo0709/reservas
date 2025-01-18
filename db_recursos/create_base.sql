@@ -43,6 +43,8 @@ CREATE TABLE Recurso (
 	FOREIGN KEY (id_sede) REFERENCES Sede (id_sede) 
 );
 
+CREATE INDEX nom_rec ON Recurso(nombre_recurso);
+
 CREATE TABLE Empleado (
 	rfc						VARCHAR (13) PRIMARY KEY,
 	nom_empleado			VARCHAR (32),

@@ -4,10 +4,8 @@ SELECT * FROM Empleado;
 SELECT * FROM Recurso;
 SELECT * FROM GetHistorialEmpleado WHERE rfc = 'XXXXX010101XX';
 
-SELECT r.id_recurso, r.nombre_recurso
-FROM Recurso r
-WHERE r.estado = 1
-AND NOT EXISTS (
+SELECT * FROM GetRecursosDisponibles r
+WHERE NOT EXISTS (
 	SELECT 1
 	FROM Solicitud_Recurso sr
     JOIN
@@ -21,20 +19,16 @@ AND NOT EXISTS (
 	WHERE
 		sr.id_recurso = r.id_recurso
 	AND 
-		s.estado IN ('ACEPTADA')
+		s.estado = 'ACEPTADA'
 	AND 
     (
-		(
-			('2025-01-18 10:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
-			OR ('2025-01-18 12:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
-		)
-		OR
-		(
-			('2025-01-22 15:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
-			OR ('2025-01-22 17:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
-		)
+		('2025-01-18 10:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
+		OR ('2025-01-18 12:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
+		OR ('2025-01-22 15:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
+		OR ('2025-01-22 17:00:00' BETWEEN sh.f_inicio AND sh.f_fin)
 	)
-);
+)
+HAVING id_sede = 1 AND r.nombre_recurso LIKE '%Laptop%';
 
 SELECT * FROM Recurso;
 SELECT * FROM GetSolicitudesDetalle;

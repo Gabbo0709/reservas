@@ -112,4 +112,20 @@ CREATE VIEW GetSelectArea AS
 	ON
 		s.id_sede = a.id_sede;
         
+CREATE VIEW GetRecursosDisponibles AS
+	SELECT	r.id_recurso, 
+			r.nombre_recurso,
+            r.cantidad_disponible,
+            r.tipo,
+            r.detalles,
+            r.servicio,
+            se.id_sede
+	FROM
+		Recurso r
+	JOIN
+		Sede se
+	ON
+		se.id_sede = r.id_sede
+	WHERE r.estado = 1;
+        
 		
