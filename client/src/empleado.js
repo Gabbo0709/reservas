@@ -26,6 +26,7 @@ async function initialize () {
     await obtenerEmpleados()
     selectArea.addEventListener('change', obtenerEmpleadosArea)
     formEmpleado.addEventListener('submit', agregarEmpleado)
+    btnBuscar.addEventListener('click', buscarRFC)
 }
 
 const obtenerAreas = async () =>{
@@ -65,10 +66,12 @@ const renderEmpleados = (data) => {
     data.forEach(element => {
         html += `
             <tr>
+                <td>${element.rfc}</td>
                 <td>${element.nombre}</td>
                 <td>${element.nom_area}</td>
                 <td>${element.correo}</td>
                 <td>${element.telefono}</td>
+                <td>${element.estado ? 'Activo' : 'suspendido'}</td>
                 <td id='${element.rfc}'>
                     <button class='btn btn-outline-danger'>Cambiar estado</button>
                 </td>
@@ -76,6 +79,14 @@ const renderEmpleados = (data) => {
         `
     })
     empleados.innerHTML = html
+}
+
+const buscarRFC = async (e) => {
+    e.preventDefault()
+    let query = 'empleado/buscarRFC'
+    let params = `sede=${sede}&rfc=${txtRFC.value}`
+    let data = await fetchData(query, params)
+    renderEmpleados(data)
 }
 
 function agregarEmpleado(e) {

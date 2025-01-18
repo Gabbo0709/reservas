@@ -22,6 +22,13 @@ public class EmpleadosController {
         return jdbcTemplate.queryForList(query);
     }
 
+    @GetMapping("/empleado/buscarRFC")
+    public List<Map<String, Object>> empleadoRFC(@RequestParam(value = "sede", defaultValue = "1") Integer sede,
+                                                 @RequestParam(value = "rfc") String rfc) {
+        String query = "SELECT * FROM GetEmpleados WHERE id_sede = " + sede + " AND rfc LIKE '%" + rfc + "%'";
+        return jdbcTemplate.queryForList(query);
+    }
+
     @GetMapping("/empleado/obtenerEmpleados")
     public List<Map<String, Object>> empleadosSede(
             @RequestParam(value = "sede", defaultValue = "1") Integer sede,

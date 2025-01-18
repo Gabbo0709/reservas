@@ -61,7 +61,7 @@ CREATE TABLE Solicitud (
 	id_solicitud			INT,
     year_solicitud			INT NOT NULL,
     month_solicitud			INT NOT NULL,
-	estado					VARCHAR (10) DEFAULT 'PENDIENTE',
+	estado					VARCHAR (10) DEFAULT 'ACEPTADA',
 	fecha_solicitud	 		DATE DEFAULT (CURRENT_DATE),
     motivo					VARCHAR (128),
 	rfc						VARCHAR (13),

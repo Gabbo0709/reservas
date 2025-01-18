@@ -1,5 +1,6 @@
 USE db_recursos;
 
+SELECT * FROM Empleado;
 SELECT * FROM Recurso;
 SELECT * FROM GetHistorialEmpleado WHERE rfc = 'XXXXX010101XX';
 
@@ -20,7 +21,7 @@ AND NOT EXISTS (
 	WHERE
 		sr.id_recurso = r.id_recurso
 	AND 
-		s.estado IN ('PENDIENTE')
+		s.estado IN ('ACEPTADA')
 	AND 
     (
 		(
