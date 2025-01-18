@@ -4,7 +4,7 @@ SELECT * FROM Recurso;
 SELECT * FROM GetHistorialEmpleado WHERE rfc = 'XXXXX010101XX';
 
 SELECT r.id_recurso, r.nombre_recurso
-FROM	Recurso r
+FROM Recurso r
 WHERE r.estado = 1
 AND NOT EXISTS (
 	SELECT 1

@@ -50,8 +50,9 @@ CREATE VIEW GetRecursoSede AS
 CREATE VIEW GetEmpleados AS
 	SELECT	e.rfc,
 			CONCAT(e.nom_empleado, ' ', e.ap_empleado, ' ', e.am_empleado) AS nombre,
-			e.email,
-			e.tel_empleado,
+			e.email AS correo,
+			e.tel_empleado AS telefono,
+            e.estado,
 			a.nom_area,
 			s.id_sede,
 			a.id_area
@@ -98,4 +99,17 @@ CREATE VIEW GetSolicitudesDetalle AS
 		Sede se
 	ON
 		se.id_sede = r.id_sede;
+        
+CREATE VIEW GetSelectArea AS
+	SELECT 	a.id_area,
+			a.nom_area,
+            s.id_sede,
+            s.nom_sede
+	FROM
+		Areas a
+	JOIN
+		Sede s
+	ON
+		s.id_sede = a.id_sede;
+        
 		

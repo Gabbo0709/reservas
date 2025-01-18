@@ -51,6 +51,8 @@ CREATE TABLE Empleado (
     email					VARCHAR (128),
 	tel_empleado			VARCHAR(128),
 	id_area				  	INT, 
+    estado					TINYINT(1) DEFAULT 1,
+    CHECK (estado IN (0, 1)),
 	FOREIGN KEY (id_area) REFERENCES Areas (id_area)
 );
 

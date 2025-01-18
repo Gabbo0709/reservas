@@ -1,85 +1,157 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestionar empleados</title>
+    <link rel="stylesheet" href="../utils/bootrsap_5.3.3/bootstrap.min.css">
+    <script src="../src/utilidades.js"></script>
+    <script src="../src/empleado.js"></script>
 </head>
+
 <body>
-    <article>
-        <h2>Gestion de emmpleados</h2>
-        <form>
-            
-            <label>
-                Buscar por Area:
-                <select id="select-area">
-                    <option selected disabled>Area</option>
+    <header class="navbar navbar-expand-lg nabvar-dark bg-dark sticky-top py-3 px-3" data-bs-theme="dark">
+        <nav class="container-fluid px-3">
+            <a class="navbar-brand">
+                <img alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="offcanvas" aria-label="Navegacion"
+                aria-controls="navbarOffcanvasLg" aria-expanded="false" data-bs-target="#navbarSistema">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <section id="navbarSistema" class="offcanvas offcanvas-end" tabindex="-1"
+                aria-labelledby="navbarOffcanvasLgLabel">
+                <section class="offcanvas-body">
+                    <ul class="navbar-nav justify-content-end flex-grow-1">
+                        <li class="nav-item">
+                            <a class="nav-link">
+                                Realizar solicitud
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link">
+                                Historial solicitudes
+                            </a>
+                        </li>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                                aria-expanded="false">
+                                Usuario
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-end">
+                                <li>
+                                    <a class="dropdown-item">
+                                        Datos personales
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <a class="dropdown-item">
+                                        Cerrar sesion
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </section>
+            </section>
+        </nav>
+    </header>
+    <main class="container py-5">
+        <article class="row mb-3">
+            <h2>Gestion de empleados</h2>
+            <form class="col-10 py-2">
+                <section class="input-group mb-3">
+                    <label class="input-group-text" for="select-area">Buscar por Area</label>
+                    <select id="select-area" class="form-select">
+                        <option selected disabled>Buscar por area</option>
                     </select>
-            </label>
-            <label>
-                Buscar por RFC:
-                <input id="txt-rfc" type="text">
-            </label>
-            
-            <button id="btn-buscar">Buscar</button>
-            <button id="btn-agregar">Agregar</button>
-        </form>
-    </article>
-    <section>
-        <table>
-            <thead>
-                <th>Nombre</th>
-                <th>Area</th>
-						 <th>Teléfono</th>
-                <th>Estado</th>
-                <th>Detalles</th>
-            </thead>
-            <tbody id="tb-empleado-body">
-                
-            </tbody>
-        </table>
-    </section>
-    <dialog id="nuevo-empleado" open>
-        <header>
-            <h3>Agregar empleado</h3>
-        </header>
-        <menu>
-            <form>
-                <label>
-                    Nombre:
-                    <input id="txt-nombre-emp" autofocus>
-                </label>
-                <label>
-                    Apellido paterno:
-                    <input id="txt-ap-emp">
-                </label>
-                <label>
-                    Apellido materno:
-                    <input id="txt-am-emp">
-                </label>
-                <label>
-                    Correo electronico:
-                    <input type="mail" id="txt-email-emp">
-                </label>
-                <label>
-                    RFC:
-                    <input type="text" id="txt-rfc-emp" maxlength="13">
-                </label>
-						 <label>
-								Teléfono:
-								<input type="tel" maxlength="12" id="txt-tel-emp">
-						 </label>
-                <label>
-                    Area:
-                    <select id="select-area-emp">
-                        <option selected disabled>Area del empleado</option>
-                    </select>
-                </label>
-                <footer>
-                    <button>Agregar</button>
-                    <button>Cancelar</button>
-                </footer>
+                </section>
+                <section class="input-group mb-3">
+                    <label class="input-group-text" for="txt-rfc">Buscar por RFC:</label>
+                    <input class="form-control" id="txt-rfc" placeholder="RFC" type="text">
+                    <button id="btn-buscar" class="btn btn-outline-primary">Buscar</button>
+                </section>
             </form>
-        </menu>
-    </dialog>
+            <section class="col-2 vstack gap-2 text-center">
+                <label class="fs-5">Nuevo empleado:</label>
+                <button id="btn-modal" class="btn btn-outline-success mb-4 h-100 mx-4" data-bs-toggle="modal"
+                    data-bs-target="#empleadoModal">+</button>
+            </section>
+        </article>
+        <section class="table-responsive rounded-4">
+            <table class="table table-hover text-center">
+                <thead class="table-dark">
+                    <th>Nombre</th>
+                    <th>Area</th>
+                    <th>Correo</th>
+                    <th>Teléfono</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </thead>
+                <tbody id="tb-empleado-body" class="table-group-divider">
+                </tbody>
+            </table>
+        </section>
+        <section id="empleadoModal" class="modal fade" tabindex="-1" aria-labelledby="empleadoModalLabel"
+            aria-hidden="true">
+            <article class="modal-dialog modal-dialog-centered">
+                <article class="modal-content">
+                    <header class="modal-header">
+                        <h3 class="modal-title fs-5" id="empleadoModalLabel">Agregar empleado</h3>
+                        <button class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+                    </header>
+                    <menu class="modal-body">
+                        <form id="form-empleado" class="container">
+                            <label class="form-label">Nombre:</label>
+                            <input name="txt-nombre-emp" placeholder="Nombre" class="form-control mb-3" autofocus required>
+                            <section class="row">
+                                <label class="form-label col-6">
+                                    Apellido paterno:
+                                    <input name="txt-ap-emp" class="form-control mb-3" placeholder="Apellido paterno" required>
+                                </label>                             
+                                <label class="form-label col-6">
+                                    Apellido materno:
+                                    <input name="txt-am-emp" class="form-control mb-3" placeholder="Apellido materno" required>
+                                </label>    
+                            </section>                          
+                            <label class="fornm-label">
+                                Correo electronico:
+                            </label>
+                            <input type="email" name="txt-email-emp" class="form-control mb-3" placeholder="mail@mail.com" required>
+                            <section class="row">
+                                <label class="form-label col-6">
+                                    RFC:
+                                    <input type="text" class="form-control mb-3" name="txt-rfc-emp" maxlength="13" placeholder="XXX####XXX" required>
+                                </label>
+                                <label class="fomr-label col-6">
+                                    Teléfono:
+                                <input type="tel" class="form-control mb-3" maxlength="12" name="txt-tel-emp" required>
+                                </label>
+                            </section>
+                            <label class="form-label">
+                                Area:
+                            </label>
+                            <select id="select-area-emp" class="form-select mb-3" name="select-area-emp" required>
+                                <option selected disabled>Area del empleado</option>
+                            </select>
+                            <footer class="modal-footer">
+                                <button id="btn-agregar" class="btn btn-outline-success">Agregar</button>
+                                <button class="btn btn-outline-danger" data-bs-dismiss="modal"
+                                    aria-label="close">Cancelar</button>
+                            </footer>
+                        </form>
+                    </menu>
+                </article>
+            </article>
+        </section>
+    </main>
+    <footer>
+        <script src="../utils/bootrsap_5.3.3/bootstrap.bundle.min.js"></script>
+    </footer>
 </body>
+
 </html>
